@@ -4,24 +4,26 @@ import { Label } from "@/components/ui/label";
 
 export function MultiChoiceQuestionRespondent({
   options,
-  value,
+  value, 
   onChange,
 }: {
   options: string[];
-  value: string;
-  onChange: (v: string) => void;
+  value: number | string | undefined;
+  onChange: (v: number) => void;
 }) {
+  const stringValue = typeof value === "number" ? String(value) : value ?? "";
+
   return (
     <RadioGroup
-      value={value ?? ""}
-      onValueChange={onChange}
+      value={stringValue}
+      onValueChange={(v) => onChange(Number(v))}
       className="space-y-2"
     >
       {(options ?? []).map((o, idx) => {
-        const id = `mcq-${idx}-${o}`;
+        const id = `mcq-${idx}`;
         return (
           <div key={id} className="flex items-center gap-2">
-            <RadioGroupItem value={o} id={id} />
+            <RadioGroupItem value={String(idx)} id={id} />
             <Label htmlFor={id}>{o || `Option ${idx + 1}`}</Label>
           </div>
         );

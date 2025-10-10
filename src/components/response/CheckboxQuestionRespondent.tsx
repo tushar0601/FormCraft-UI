@@ -8,10 +8,10 @@ export function CheckboxQuestionRespondent({
   onChange,
 }: {
   options: string[];
-  values: string[];
-  onChange: (vals: string[]) => void;
+  values: number[];
+  onChange: (vals: number[]) => void;
 }) {
-  const toggle = (opt: string, checked: boolean | "indeterminate") => {
+  const toggle = (opt: number, checked: boolean | "indeterminate") => {
     const isChecked = checked === true;
     if (isChecked) onChange([...(values ?? []), opt]);
     else onChange((values ?? []).filter((x) => x !== opt));
@@ -26,8 +26,8 @@ export function CheckboxQuestionRespondent({
           <div key={id} className="flex items-center gap-2">
             <Checkbox
               id={id}
-              checked={selected.includes(o)}
-              onCheckedChange={(c) => toggle(o, c)}
+              checked={selected.includes(idx)}
+              onCheckedChange={(c) => toggle(Number(idx), c)}
             />
             <Label htmlFor={id}>{o || `Option ${idx + 1}`}</Label>
           </div>

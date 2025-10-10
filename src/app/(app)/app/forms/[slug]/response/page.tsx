@@ -57,7 +57,12 @@ export default function ResponsePage() {
       case "long_text":
         return { text: raw ?? "" };
       case "multichoice":
-        return { selected: raw ?? null };
+        return {
+          selected:
+            raw === null || raw === undefined || raw === ""
+              ? null
+              : Number(raw),
+        };
       case "checkbox":
         return Array.isArray(raw) ? { selected: raw } : { checked: !!raw };
       case "date":
@@ -85,6 +90,10 @@ export default function ResponsePage() {
       )
     );
   };
+
+  useEffect(() => {
+    console.log(responses);
+  }, [responses]);
 
   const handleSubmit = () => {
     const blocks = currentForm?.blocks ?? [];
@@ -200,15 +209,15 @@ export default function ResponsePage() {
                 {q.block_type === "multichoice" && (
                   <MultiChoiceQuestionRespondent
                     options={q.config?.options ?? []}
-                    value={responses[q.id] ?? ""}
-                    onChange={(val) => handleChange(q.id, val)}
+                    value={responses[q.id]}
+                    onChange={(idx) => handleChange(q.id, idx)}
                   />
                 )}
 
                 {q.block_type === "checkbox" && (
                   <CheckboxQuestionRespondent
                     options={q.config?.options ?? []}
-                    values={(responses[q.id] as string[]) ?? []}
+                    values={responses[q.id] as number[]}
                     onChange={(vals) => handleChange(q.id, vals)}
                   />
                 )}
