@@ -19,10 +19,10 @@ const NAV = [
     active: (p: string) => /^\/app\/forms\/[^/]+\/responses(\/|$)/.test(p),
   },
   {
-    href: "/app/forms/1/analytics",
+    href: "/app/analytics",
     label: "Analytics",
     icon: BarChart3,
-    active: (p: string) => /^\/app\/forms\/[^/]+\/analytics(\/|$)/.test(p),
+    active: (p: string) => /^\/app\/analytics(\/|$)/.test(p),
   },
   {
     href: "/app/integrations",

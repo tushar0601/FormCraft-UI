@@ -24,7 +24,7 @@ export function DateQuestionRespondent({
 }) {
   const [open, setOpen] = React.useState(false);
 
-  // Allow both Date and ISO string coming in
+
   const selected =
     typeof value === "string" && value
       ? new Date(value)
