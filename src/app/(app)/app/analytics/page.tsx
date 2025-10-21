@@ -30,6 +30,7 @@ import {
 } from "@/types/form_analytics";
 import { FormAccess } from "@/types/enum";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/navigation";
 
 function Sparkline({
   values,
@@ -101,6 +102,10 @@ function VisibilityBadge({ v }: { v: FormAccess }) {
 }
 
 function FormCard({ f }: { f: FormAnalyticsData }) {
+  const router = useRouter();
+  const handleViewAnalytics = () => {
+    router.push(`/app/analytics/${"temp_slug"}`);
+  };
   return (
     <Card className="rounded-2xl">
       <CardHeader className="pb-2">
@@ -127,7 +132,9 @@ function FormCard({ f }: { f: FormAnalyticsData }) {
         </p>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">View Analytics</Button>
+        <Button className="w-full" onClick={handleViewAnalytics}>
+          View Analytics
+        </Button>
       </CardFooter>
     </Card>
   );
